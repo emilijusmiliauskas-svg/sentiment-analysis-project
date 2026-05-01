@@ -1,8 +1,9 @@
 import argparse
 from typing import Any
+
 import numpy as np
-from numpy.typing import NDArray
 from joblib import load
+from numpy.typing import NDArray
 
 
 def load_model(model_path: str) -> Any:
@@ -20,7 +21,7 @@ def main(model_path: str, input_texts: list[str]) -> None:
     model = load_model(model_path)
     preds = predict(model, input_texts)
     for text, label in zip(input_texts, preds):
-        print(f"{label}\t{text}")
+        print(f"{label}\t{text}")  # noqa: T201
 
 
 if __name__ == "__main__":

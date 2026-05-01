@@ -43,6 +43,28 @@ jobs:
         run: |
           python src/predict.py --model models/sentiment.joblib "I loved this film" "That was bad"
 
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run ruff linter
+        run: ruff check .
+
+      - name: Run ruff formatter check
+        run: ruff format . --check
+
   test:
     runs-on: ubuntu-latest
     steps:

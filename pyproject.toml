@@ -1,0 +1,9 @@
+[tool.ruff]
+line-length = 88
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "T20", "UP"]
+
+[tool.ruff.format]
+quote-style = "double"
+docstring-code-format = true
