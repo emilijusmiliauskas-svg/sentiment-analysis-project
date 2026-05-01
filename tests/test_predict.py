@@ -1,8 +1,8 @@
-import pytest
 import pandas as pd
+import pytest
 
-from src.train import train_model
 from src.predict import predict
+from src.train import train_model
 
 
 @pytest.fixture(scope="module")
