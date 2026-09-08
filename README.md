@@ -21,9 +21,11 @@ Swapping in a real corpus is a one-line change to `--data`. The interesting engi
 | **run-predict** | Trains the model from raw data and runs a live prediction — proves the entry points work from a clean checkout, not just on my machine |
 | **lint** | `ruff check` and `ruff format --check` — fails the build on unformatted code |
 | **test** | `pytest` against the prediction path |
-| **build-and-push** | Builds the Docker image and pushes to Docker Hub — gated on `needs: [test, lint]` |
+| **build-and-push** | Trains the model into the build context, builds the Docker image, and pushes to Docker Hub — gated on `needs: [test, lint]` |
 
 The gating matters: **the image cannot publish unless the tests and the linter both pass.** A broken build stops at the boundary instead of shipping.
+
+`models/` is git-ignored, so a fresh checkout has no trained artifact and the image's `COPY models/` had nothing to copy — the Docker build failed on every push for four months. The `build-and-push` job now trains the model into the build context first, so the image ships a model built from the committed data in the same run that tested it, rather than whatever binary happened to be committed.
 
 The workflow is also **path-filtered** — it triggers only on changes to `src/`, `tests/`, `data/`, `requirements.txt`, or the workflow itself, so documentation edits don't burn CI minutes.
 
