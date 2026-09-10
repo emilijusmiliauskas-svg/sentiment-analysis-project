@@ -1,5 +1,8 @@
 # Sentiment Analysis: A Production Pipeline Around a Deliberately Small Model
 
+[![CI](https://github.com/emilijusmiliauskas-svg/sentiment-analysis-project/actions/workflows/ci.yml/badge.svg)](https://github.com/emilijusmiliauskas-svg/sentiment-analysis-project/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
 A scikit-learn sentiment classifier wrapped in the machinery that turns a script into something shippable — **automated testing, linting, containerisation, and a four-job CI/CD pipeline that publishes a Docker image on every merge to `main`.**
 
 The model is intentionally the least interesting part. It is TF-IDF into logistic regression, trained on 20 labelled sentences. **The point of this repository is everything around it.**
